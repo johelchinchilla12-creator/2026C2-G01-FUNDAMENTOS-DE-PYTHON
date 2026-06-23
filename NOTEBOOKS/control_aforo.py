@@ -73,3 +73,9 @@ Otros casos para probar:
 
 
 # Desarrolle su solución a partir de esta línea.
+CAPACIDAD_MAXIMA = 700
+ocupacion = 0
+grupos_aceptados = []
+grupos_rechazados = []
+
+entrada = input("Ingrese el tamaño del grupo (o 'fin' para terminar): ")
