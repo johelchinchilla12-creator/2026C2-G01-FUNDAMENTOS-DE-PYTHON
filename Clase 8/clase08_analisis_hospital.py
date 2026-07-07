@@ -54,6 +54,7 @@ else:
     conteo_hombres = 0
     adultos_mayores = []
     total_diagnosticos = 0
+    conteo_enfermedades = {}
 
     # 4. Ciclo principal
     # Cada vuelta del ciclo representa un paciente del JSON.
@@ -62,6 +63,14 @@ else:
         edad = paciente["edad"]
         provincia = paciente["provincia"]
         genero = paciente["genero"]
+        condiciones = paciente["enfermedades"]
+
+        enfermedades = paciente["enfermedades"]
+        for enfermedad in enfermedades:
+            if enfermedad in conteo_enfermedades:
+                conteo_enfermedades[enfermedad] += 1
+            else:
+                conteo_enfermedades[enfermedad] = 1
 
         # REQUERIMIENTO 3:
         # Complete aqui los acumuladores dentro del ciclo.
@@ -92,7 +101,9 @@ else:
 
         enfermedades = paciente["enfermedades"]
         total_diagnosticos += len(enfermedades)
-        print(f"Paciente {nombre} tiene {len(enfermedades)} diagnosticos.")
+        print(
+            f"Paciente {nombre} tiene {len(enfermedades)} diagnosticos, estan pal tigre los mops."
+        )
 
     # REQUERIMIENTO 4:
     # Calcule la edad_promedio usando calcular_promedio().
@@ -107,6 +118,8 @@ else:
     print("Mujeres:", conteo_mujeres)
     print("Hombres:", conteo_hombres)
     print("Adultos mayores:", adultos_mayores)
+    print("Total enfermedades:", total_diagnosticos)
+    print("Conteo de enfermedades:", conteo_enfermedades)
 
     # REQUERIMIENTO 5:
     # Escriba dos conclusiones basadas en los resultados.
