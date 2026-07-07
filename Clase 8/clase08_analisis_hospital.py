@@ -7,7 +7,7 @@ simples.
 
 import json
 
-ARCHIVO_DATOS = "datos_clinica.json"
+ARCHIVO_DATOS = "Clase 8/datos_clinica.json"  # clinica_avanzado.json
 
 
 def calcular_promedio(suma, cantidad):
@@ -23,7 +23,16 @@ def es_adulto_mayor(edad):
 # REQUERIMIENTO 1:
 # Construya aqui la lectura del JSON con el docente.
 # Al terminar, la variable pacientes debe tener 15 registros.
-pacientes = []
+with open(ARCHIVO_DATOS, "r", encoding="utf-8") as archivo:
+    pacientes = json.load(archivo)
+
+print("Tipo de datos", type(pacientes))
+print("Cantidad de pacientes:", len(pacientes))
+
+primer_paciente = pacientes[0]
+print("Primer paciente:", primer_paciente)
+
+print("campos del diccionario", primer_paciente.keys())
 
 
 # 2. Exploracion inicial
@@ -36,9 +45,12 @@ else:
     # REQUERIMIENTO 2:
     # Explore el primer paciente y muestre sus llaves y valores.
 
-    # Variables acumuladoras del analisis.  suma_edades, conteo_san_jose, 
+    print("Primer paciente:", primer_paciente)
+
+print("campos del diccionario", primer_paciente.keys())
+
+    # Variables acumuladoras del analisis.  suma_edades, conteo_san_jose,
     # conteo_mujeres, conteo_hombres y adultos_mayores.
- 
 
     # 4. Ciclo principal
     # Cada vuelta del ciclo representa un paciente del JSON.
@@ -71,12 +83,12 @@ else:
     edad_promedio = 0
 
     # Resultados
-    #print("\nRESUMEN BASICO")
-    #print("Edad promedio:", round(edad_promedio, 1))
-    #print("Pacientes de San Jose:", conteo_san_jose)
-    #print("Mujeres:", conteo_mujeres)
-    #print("Hombres:", conteo_hombres)
-    #print("Adultos mayores:", adultos_mayores)
+    # print("\nRESUMEN BASICO")
+    # print("Edad promedio:", round(edad_promedio, 1))
+    # print("Pacientes de San Jose:", conteo_san_jose)
+    # print("Mujeres:", conteo_mujeres)
+    # print("Hombres:", conteo_hombres)
+    # print("Adultos mayores:", adultos_mayores)
 
     # REQUERIMIENTO 5:
     # Escriba dos conclusiones basadas en los resultados.
