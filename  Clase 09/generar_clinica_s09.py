@@ -13,14 +13,13 @@ import random
 import tempfile
 from pathlib import Path
 
-
 TOTAL_PACIENTES = 1_000_000
 ARCHIVO_SALIDA = "clinica_s09.json"
 
 # Los nombres se asignan a posiciones cuyo genero sintetico ya coincide. De
 # este modo no se altera la secuencia aleatoria usada por las verificaciones.
 ESTUDIANTES_CURSO = {
-    1: "Germán Antonio Cerdas Valle",
+    1: "Johel Chinchilla Oviedo",
     2: "Bryan Cruz Flores",
     6: "José Pablo Delgado Martínez",
     8: "Eduardo Jesús Jiménez Hernández",
@@ -200,29 +199,120 @@ PROVINCIAS_CANTONES = {
 }
 
 NOMBRES_M = [
-    "Juan", "Carlos", "Luis", "José", "Andrés", "Miguel", "Diego",
-    "Marcos", "Pablo", "Roberto", "David", "Jorge", "Fernando",
-    "Alberto", "Sergio", "Manuel", "Ricardo", "Alejandro", "Cristian",
-    "Héctor", "Rafael", "Sebastián", "Gabriel", "Emilio", "Ernesto",
-    "Tomás", "Iván", "Óscar", "Rodrigo", "Víctor", "Esteban",
-    "Mauricio", "Gerardo", "Arturo", "Raúl",
+    "Juan",
+    "Carlos",
+    "Luis",
+    "José",
+    "Andrés",
+    "Miguel",
+    "Diego",
+    "Marcos",
+    "Pablo",
+    "Roberto",
+    "David",
+    "Jorge",
+    "Fernando",
+    "Alberto",
+    "Sergio",
+    "Manuel",
+    "Ricardo",
+    "Alejandro",
+    "Cristian",
+    "Héctor",
+    "Rafael",
+    "Sebastián",
+    "Gabriel",
+    "Emilio",
+    "Ernesto",
+    "Tomás",
+    "Iván",
+    "Óscar",
+    "Rodrigo",
+    "Víctor",
+    "Esteban",
+    "Mauricio",
+    "Gerardo",
+    "Arturo",
+    "Raúl",
 ]
 NOMBRES_F = [
-    "María", "Ana", "Laura", "Sofía", "Carmen", "Elena", "Diana",
-    "Gabriela", "Paola", "Valeria", "Andrea", "Claudia", "Patricia",
-    "Mónica", "Rosa", "Silvia", "Isabel", "Jimena", "Natalia",
-    "Fernanda", "Lucía", "Carolina", "Daniela", "Mariana", "Adriana",
-    "Alicia", "Beatriz", "Rocío", "Verónica", "Liliana", "Alejandra",
-    "Stephanie", "Vanessa", "Rebeca", "Yolanda",
+    "María",
+    "Ana",
+    "Laura",
+    "Sofía",
+    "Carmen",
+    "Elena",
+    "Diana",
+    "Gabriela",
+    "Paola",
+    "Valeria",
+    "Andrea",
+    "Claudia",
+    "Patricia",
+    "Mónica",
+    "Rosa",
+    "Silvia",
+    "Isabel",
+    "Jimena",
+    "Natalia",
+    "Fernanda",
+    "Lucía",
+    "Carolina",
+    "Daniela",
+    "Mariana",
+    "Adriana",
+    "Alicia",
+    "Beatriz",
+    "Rocío",
+    "Verónica",
+    "Liliana",
+    "Alejandra",
+    "Stephanie",
+    "Vanessa",
+    "Rebeca",
+    "Yolanda",
 ]
 APELLIDOS = [
-    "González", "Rodríguez", "López", "Martínez", "García", "Pérez",
-    "Sánchez", "Ramírez", "Torres", "Vargas", "Castro", "Jiménez",
-    "Vega", "Morales", "Herrera", "Núñez", "Ortiz", "Romero",
-    "Flores", "Cruz", "Méndez", "Ríos", "Gutiérrez", "Chaves",
-    "Mora", "Brenes", "Solano", "Monge", "Araya", "Quesada",
-    "Salas", "Campos", "Fernández", "Rojas", "Alfaro", "Madrigal",
-    "Segura", "Vásquez", "Picado", "Aguilar",
+    "González",
+    "Rodríguez",
+    "López",
+    "Martínez",
+    "García",
+    "Pérez",
+    "Sánchez",
+    "Ramírez",
+    "Torres",
+    "Vargas",
+    "Castro",
+    "Jiménez",
+    "Vega",
+    "Morales",
+    "Herrera",
+    "Núñez",
+    "Ortiz",
+    "Romero",
+    "Flores",
+    "Cruz",
+    "Méndez",
+    "Ríos",
+    "Gutiérrez",
+    "Chaves",
+    "Mora",
+    "Brenes",
+    "Solano",
+    "Monge",
+    "Araya",
+    "Quesada",
+    "Salas",
+    "Campos",
+    "Fernández",
+    "Rojas",
+    "Alfaro",
+    "Madrigal",
+    "Segura",
+    "Vásquez",
+    "Picado",
+    "Aguilar",
 ]
 
 
@@ -257,9 +347,7 @@ def crear_paciente(numero):
     return paciente
 
 
-def generar_archivo(
-    total=TOTAL_PACIENTES, destino=None, mostrar_progreso=True
-) -> Path:
+def generar_archivo(total=TOTAL_PACIENTES, destino=None, mostrar_progreso=True) -> Path:
     """Genera un JSON reproducible y lo publica solo cuando esta completo."""
     if total < 1:
         raise ValueError("El total de pacientes debe ser mayor que cero.")
@@ -298,9 +386,8 @@ def generar_archivo(
                 else:
                     archivo.write("\n")
 
-                debe_mostrar = (
-                    mostrar_progreso
-                    and (numero % intervalo_progreso == 0 or numero == total)
+                debe_mostrar = mostrar_progreso and (
+                    numero % intervalo_progreso == 0 or numero == total
                 )
                 if debe_mostrar:
                     porcentaje = numero / total * 100
@@ -348,8 +435,7 @@ def main():
         parser.error("--total debe ser mayor que cero")
     if argumentos.total != TOTAL_PACIENTES and argumentos.destino is None:
         parser.error(
-            "--destino es obligatorio cuando --total es distinto de "
-            f"{TOTAL_PACIENTES}"
+            f"--destino es obligatorio cuando --total es distinto de {TOTAL_PACIENTES}"
         )
 
     destino = generar_archivo(
