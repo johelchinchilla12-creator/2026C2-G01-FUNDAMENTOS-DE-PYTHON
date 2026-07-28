@@ -2,10 +2,8 @@
 
 import pandas as pd
 
-
 URL_BCCR = (
-    "https://gee.bccr.fi.cr/IndicadoresEconomicos/Cuadros/"
-    "frmConsultaTCVentanilla.aspx"
+    "https://gee.bccr.fi.cr/IndicadoresEconomicos/Cuadros/frmConsultaTCVentanilla.aspx"
 )
 
 

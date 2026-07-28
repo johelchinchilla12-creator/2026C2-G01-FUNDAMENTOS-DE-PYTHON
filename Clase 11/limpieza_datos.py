@@ -9,12 +9,8 @@ def limpiar_datos(datos):
 
     datos_limpios.columns = datos_limpios.iloc[0]
     datos_limpios = datos_limpios.iloc[1:].reset_index(drop=True)
-    datos_limpios["Tipo de Entidad"] = (
-        datos_limpios["Tipo de Entidad"].ffill()
-    )
-    datos_limpios = datos_limpios.dropna(
-        subset=["Entidad Autorizada"]
-    ).copy()
+    datos_limpios["Tipo de Entidad"] = datos_limpios["Tipo de Entidad"].ffill()
+    datos_limpios = datos_limpios.dropna(subset=["Entidad Autorizada"]).copy()
 
     columnas_numericas = ["Compra", "Venta"]
 
@@ -27,11 +23,25 @@ def limpiar_datos(datos):
             errors="coerce",
         )
 
-    datos_limpios = datos_limpios.dropna(
-        subset=["Compra", "Venta"]
-    ).copy()
-    datos_limpios["Diferencial"] = (
-        datos_limpios["Venta"] - datos_limpios["Compra"]
+    datos_limpios = datos_limpios.dropna(subset=["Compra", "Venta"]).copy()
+    datos_limpios["Diferencial"] = datos_limpios["Venta"] - datos_limpios["Compra"]
+    # Renombrar nombres Columnas
+    datos_limpios.rename(
+        columns={
+            "Tipo de Entidad": "TIPO",
+            "Entidad Autorizada": "ENTIDAD",
+            "Diferencial Cambiario": "DIFERENCIAL",
+            "Compra": "COMPRA",
+            "Venta": "VENTA",
+            "Última Actualización": "FECHA",
+        },
+        inplace=True,
     )
-
     return datos_limpios
+
+
+def filter_diferencial_alto(datos: pd.DataFrame) -> pd.DataFrame:
+    """Devuelve diferencial alto en un df"""
+    promedio_diferencial = datos["Diferencial"].mean()
+    filtro = datos["Diferencial"] > promedio_diferencial
+    return datos[filtro].copy()
