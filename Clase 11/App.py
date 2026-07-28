@@ -1,13 +1,17 @@
 """Programa principal del proyecto modular BCCR"""
 
 from lectura_datos import URL_BCCR, cargar_tabla_bccr
-from limpieza_datos import limpiar_datos
+from limpieza_datos import (
+    filtrar_por_tipo_entidad,
+    limpiar_datos,
+    mostrar_diferencial_alto,
+)
 
 
-def mostrar_primeras_entidades():
-    """Muestra una vista de las columnas principales"""
-    columnas = ["Entidadd, Compra, Venta, Diferencial"]
-    print(datos[columnas].head(10).to_string(index=False))
+def mostrar_primeras_entidades(datos):
+    """Muestra unba vista de las columnas principales"""
+    columnas = ["ENTIDAD", "COMPRA", "VENTA", "DIFERENCIAL"]
+    print(datos[columnas].head().to_string(index=False))
 
 
 def ejecutar():
@@ -31,11 +35,24 @@ def ejecutar():
             resultado = resultado.sort_values(by="Diferencial", ascending=False)
             mostrar_primeras_entidades(resultado)
         elif opcion == "3":
-            pass
+            filtrado = filtrar_por_tipo_entidad(datos)
+            print(filtrado.to_string())
         elif opcion == "4":
             pass
         elif opcion == "5":
-            pass
+            filtrado = filtrar_por_tipo_entidad(datos)
+            filtrado.plot.bar(
+                y="DIFERENCIAL",
+                title="Diferencial promedio por tipo de entidad",
+                legend=False,
+            )
+            filtrado.plot.bar(
+                y="COMPRA", title="Compra promedio por tipo de entidad", legend=False
+            )
+            filtrado.plot.bar(
+                y="VENTA", title="Venta promedio por tipo de entidad", legend=False
+            )
+
         elif opcion == "6":
             print("\nAnalisis finalizado ")
             input("Presione enter para salir.....")
